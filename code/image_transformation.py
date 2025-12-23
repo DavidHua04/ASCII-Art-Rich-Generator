@@ -132,3 +132,76 @@ def non_uniform_scale(
 
     img_scaled.save(output_path)
     return output_path
+
+
+def add_watermark(
+    input_path: str,
+    watermark_path: str,
+    output_path: str = None,
+    position: str = "bottom_right",
+    scale: float = 0.2,
+    opacity: float = 0.5,
+    margin: int = 10
+):
+    """
+    Add a watermark image onto a PNG image.
+
+    Parameters
+    ----------
+    input_path : str
+        Path to the input PNG.
+    watermark_path : str
+        Path to the watermark PNG (should support transparency).
+    output_path : str, optional
+        Path to save the output image.
+    position : str
+        One of: 'top_left', 'top_right', 'bottom_left', 'bottom_right', 'center'
+    scale : float
+        Relative size of watermark w.r.t. image width (e.g., 0.2 = 20% width).
+    opacity : float
+        Watermark opacity in [0, 1].
+    margin : int
+        Margin (pixels) from edges.
+
+    Returns
+    -------
+    str
+        Path to the saved image.
+    """
+    if not (0 <= opacity <= 1):
+        raise ValueError("opacity must be between 0 and 1")
+
+    base = Image.open(input_path).convert("RGBA")
+    watermark = Image.open(watermark_path).convert("RGBA")
+
+    bw, bh = base.size
+    ww = int(bw * scale)
+    wh = int(ww * watermark.height / watermark.width)
+
+    watermark = watermark.resize((ww, wh), Image.BICUBIC)
+
+    # Adjust opacity
+    if opacity < 1:
+        alpha = watermark.split()[3]
+        alpha = alpha.point(lambda p: int(p * opacity))
+        watermark.putalpha(alpha)
+
+    positions = {
+        "top_left": (margin, margin),
+        "top_right": (bw - ww - margin, margin),
+        "bottom_left": (margin, bh - wh - margin),
+        "bottom_right": (bw - ww - margin, bh - wh - margin),
+        "center": ((bw - ww) // 2, (bh - wh) // 2),
+    }
+
+    if position not in positions:
+        raise ValueError(f"Invalid position: {position}")
+
+    base.paste(watermark, positions[position], watermark)
+
+    if output_path is None:
+        base_name, ext = os.path.splitext(input_path)
+        output_path = f"{base_name}_watermarked{ext}"
+
+    base.convert("RGB").save(output_path)
+    return output_path
