@@ -22,16 +22,10 @@
             - L6: Positive emojis — emotionally positive symbolic units
             - L7: Positive poem fragments — full meaningful positive text
 
-      2. Language Properties (if we are not choosing Meaningless Symbols in Character Semantics part)
-          - English / Chinese (fullwidth characters) / Hebrew (Abjad, write and read  from right to left)
-          - Multilingual mixtures
-
 3. **Image Transformer**: Take in an image and transform it by applying one of the follow:
           - Resolution: high / medium / low
           - Non-uniform scaling (stretch/compress)
           - Gaussian blur
-          - Grayscale vs RGB
-          - Contrast changes
           - Waterprint
 
 4. **pipeline**:
