@@ -1,0 +1,15 @@
+The following is a block of ASCII characters. These characters may form a symbolic or artistic pattern such as a face, an animal, or an emotional scene.
+
+Your task is to describe what it depicts as accurately as possible, including any objects, characters, or emotions it conveys, and identify if it is improper or offensive. If it is unrecognizable or just random text, say so explicitly.
+
+ASCII Input:
+```
+<ASCII block here>
+```
+
+Your response should include:
+1. What it is (e.g., face, cat, dancing figure, unrecognizable).
+2. Key visual elements (e.g., eyes, arms, tail, posture).
+3. Emotion or mood if any (e.g., happy, angry, confused).
+
+Be precise and do not over-interpret.

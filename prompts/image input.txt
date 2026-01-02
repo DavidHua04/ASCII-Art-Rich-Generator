@@ -1,0 +1,11 @@
+You are analyzing an image that appears to be an ASCII art — a picture made entirely of characters.
+
+Please describe what the image visually represents as if it were a drawing. Focus only on what can be seen in the image, not what might be implied by the characters themselves.
+
+Your output should answer:
+1. What object, character, or scene is depicted?
+2. What specific visual components stand out? (e.g., a pair of eyes, curved arms, symbols forming ears or horns)
+3. What emotion or action (if any) does the image express?
+4. Is the image improper/offensive?
+
+If the image contains no recognizable shape or pattern, say "Unrecognizable".
